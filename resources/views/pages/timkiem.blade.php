@@ -18,7 +18,10 @@
                   <div class="section-bar clearfix">
                      <h1 class="section-title"><span>{{$search}}</span></h1>
                   </div>
-                  <div class="halim_box">
+                  <div class="halim_box">    
+
+{{--                 
+                  {--timkiem--}  --}}
                      @foreach($movie as $key => $mov)
                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
                         <div class="halim-item">
