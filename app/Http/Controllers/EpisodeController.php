@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Movie;
+use App\Models\Episode;
+use Carbon\Carbon;
 
 class EpisodeController extends Controller
 {
@@ -23,7 +26,8 @@ class EpisodeController extends Controller
      */
     public function create()
     {
-        //
+        $list_movie = Movie::orderBy('id','DESC')->pluck('title','id');
+        return view('admincp.episode.form', compact('list_movie'));
     }
 
     /**
@@ -34,7 +38,15 @@ class EpisodeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $ep = new Episode();
+        $ep->movie_id = $data['movie_id'];
+        $ep->linkphim = $data['link'];
+        $ep->episode = $data['episode'];
+        $ep->created_at = Carbon::now('Asia/Ho_Chi_Minh');
+        $ep->updated_at = Carbon::now('Asia/Ho_Chi_Minh');  
+        $ep->save();
+        return redirect()->back();
     }
 
     /**
@@ -80,5 +92,15 @@ class EpisodeController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function select_movie()
+    {
+        $id = $_GET['id'];
+        $movie = Movie::find($id);
+        $output='<option>---Chọn tập phim---</option>';                    
+        for($i=1;$i<=$movie->sotap;$i++){
+            $output.='<option value="'.$i.'">'.$i.'</option>';
+        }
+        echo $output;
     }
 }

@@ -5,7 +5,14 @@
                <div class="panel-heading">
                   <div class="row">
                      <div class="col-xs-6">
-                        <div class="yoast_breadcrumb hidden-xs"><span><span><a href="{{route('category',[$movie->category->slug])}}">{{$movie->category->title}}</a> » <span><a href="{{route('country',[$movie->country->slug])}}">{{$movie->country->title}}</a> » <span class="breadcrumb_last" aria-current="page">{{$movie->title}}</span></span></span></span></div>
+                        <div class="yoast_breadcrumb hidden-xs"><span><span><a href="{{route('category',[$movie->category->slug])}}">{{$movie->category->title}}</a> » 
+                           <span>
+                              <a href="{{route('country',[$movie->country->slug])}}">{{$movie->country->title}}</a> » 
+                              @foreach($movie->movie_genre as $gen)
+                              <a href="{{route('genre',[$gen->slug])}}">{{$gen->title}}</a> »
+                              @endforeach
+                              <span class="breadcrumb_last" aria-current="page">{{$movie->title}}</span></span>
+                           </span></span></div>
                      </div>
                   </div>
                </div>
@@ -14,7 +21,7 @@
                </div>
             </div>
             <div style="display:flex; flex-direction: row-reverse">
-                <aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4">
+               <aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4">
                <div id="halim_tab_popular_videos-widget-7" class="widget halim_tab_popular_videos-widget">
                   <div class="section-bar clearfix">
                      <div class="section-title">
@@ -79,10 +86,10 @@
                         <div class="movie_info col-xs-12">
                            <div class="movie-poster col-md-3">
                               <img class="movie-thumb" src="{{asset('uploads/movie/'.$movie->image)}}" alt="{{$movie->image}}">
-                              @if($movie->resolution==5)
+                              @if($movie->resolution!=5)
                               <div class="bwa-content">
                                  <div class="loader"></div>
-                                 <a href="{{route('watch')}}" class="bwac-btn">
+                                 <a href="{{route('watch',[$movie->slug])}}" class="bwac-btn">
                                  <i class="fa fa-play"></i>
                                  </a>
                               </div>
@@ -106,22 +113,30 @@
                                       @else
                                           FullHD
                                       @endif
-                                 </span><span class="episode">
+                                 </span>
+                                 <span class="episode">
                                     @if($movie->phude==0)
                                           Phụ Đề
                                           @if($movie->season!=0)
                                                 - Season {{$movie->season}}
                                           @endif
+                                          
                                       @else
                                           Thuyết minh
                                            @if($movie->season!=0)
                                                 - Season {{$mov->season}}
                                           @endif
                                       @endif
-                                 </span></li>
+                                 </span>
+
+                                 </li>
                                  
                                  <li class="list-info-group-item"><span>Thời lượng</span> : 133 Phút</li>
+                                 <li class="list-info-group-item"><span>Số tập</span> : {{$movie->sotap}}/{{$movie->sotap}}</li>
                                  <li class="list-info-group-item"><span>Thể loại</span> : 
+                                    @foreach($movie->movie_genre as $gen)
+                                       <a href="{{route('genre',$movie->genre->slug)}}" rel="category tag">{{$gen->title}}</a>
+                                    @endforeach
                                     <a href="{{route('genre',$movie->genre->slug)}}" rel="category tag">{{$movie->genre->title}}</a>
                                  </li>
                                  <li class="list-info-group-item"><span>Danh mục</span> : 

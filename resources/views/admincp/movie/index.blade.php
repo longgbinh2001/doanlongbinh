@@ -21,6 +21,7 @@
                   <th scope="col">Danh mục</th>
                   <th scope="col">Thể loại</th>
                   <th scope="col">Quốc gia</th>
+                  <th scope="col">Số tập</th>
                   <th scope="col">Ngày tạo</th>
                   <th scope="col">Ngày cập nhật</th>
                   <th scope="col">Năm phim</th>
@@ -79,8 +80,14 @@
                     @endif
                   </td>
                   <td>{{$cate->category->title}}</td>
-                  <td>{{$cate->genre->title}}</td>
+                  <td>
+                      @foreach($cate->movie_genre as  $gen)
+                      <span class="badge badge-dark">{{$gen->title}}  </span>
+                      @endforeach
+                  </td>
+
                   <td>{{$cate->country->title}}</td>
+                  <td>{{$cate->sotap}}</td>
                   <td>{{$cate->ngaytao}}</td>
                   <td>{{$cate->ngaycapnhat}}</td>
                   <td>
