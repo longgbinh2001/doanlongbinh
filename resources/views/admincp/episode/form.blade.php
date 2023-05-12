@@ -22,7 +22,7 @@
                         
                         <div class="form-group">
                             {!! Form::label('movie', 'Chọn Phim', []) !!}
-                            {!! Form::select('movie_id', $list_movie, isset($movie) ? $episode->movie_id : '', ['class'=>'form-control select-movie']) !!}
+                            {!! Form::select('movie_id',['0' => 'Danh sách phim', 'Phim'=> $list_movie] ,isset($movie) ? $episode->movie_id : '', ['class'=>'form-control select-movie']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('link', 'Link Phim', []) !!}
@@ -34,6 +34,7 @@
                             </select>
                             
                         </div>
+                        
                         
                         @if(!isset($movie))
                             {!! Form::submit('Thêm Phim', ['class'=>'btn btn-success']) !!}

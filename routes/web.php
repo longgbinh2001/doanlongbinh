@@ -8,6 +8,8 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\EpisodeController;
+use App\Http\Controllers\FirebaseController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,7 +27,7 @@ Route::get('the-loai/{slug}', [IndexController::class, 'genre'])->name('genre');
 Route::get('/quoc-gia/{slug}', [IndexController::class, 'country'])->name('country');
 Route::get('/phim/{slug}', [IndexController::class, 'movie'])->name('movie');
 Route::get('/xem-phim/{slug}', [IndexController::class, 'watch'])->name('watch');
-Route::get('/episode', [IndexController::class, 'episode'])->name('episode');
+Route::get('/so-tap', [IndexController::class, 'episode'])->name('so-tap');
 Route::get('/tag/{tag}', [IndexController::class, 'tag']);
 Route::get('/tim-kiem', [IndexController::class, 'timkiem'])->name('tim-kiem');
 
@@ -42,6 +44,10 @@ Route::resource('episode', EpisodeController::class);
 Route::get('/select-movie', [EpisodeController::class, 'select_movie'])->name('select-movie');
 
 
+//up video
+Route::resource('firebase', FirebaseController::class);
+Route::post('/upload-video', [VideoController::class, 'uploadVideo'])->name('upload-video');
+Route::post('/firebase/store', [FirebaseController::class, 'store'])->name('firebase.store');
 
 
 Route::resource('movie', MovieController::class);

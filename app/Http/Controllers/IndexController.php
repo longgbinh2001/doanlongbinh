@@ -97,7 +97,7 @@ class IndexController extends Controller
     $category = Category::orderBy('position','ASC')->where('status',1)->get();
     $genre = Genre::orderBy('id','DESC')->get();
     $country = Country::orderBy('id','DESC')->get();
-    $movie = Movie::with('category','genre','country','movie_genre')->where('slug',$slug)->where('status',1)->first();
+    $movie = Movie::with('category','genre','country','movie_genre','episode')->where('slug',$slug)->where('status',1)->first();
     $phimhot_sidebar = Movie::where('phim_hot',1)->where('status',1)->orderBy('ngaycapnhat','DESC')->take('30')->get();
     return view('pages.watch', compact('category','genre','country','movie','phimhot_sidebar'));
 }
