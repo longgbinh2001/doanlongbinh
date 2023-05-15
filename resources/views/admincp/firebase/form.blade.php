@@ -20,18 +20,13 @@
                         {!! Form::open(['route'=>['firebase.update',$firebase->id],'method'=>'PUT']) !!}
                     @endif
                         {!! Form::open(['url' => 'upload-video', 'files' => true]) !!}
-
-                            <div class="form-group">
-                                {!! Form::label('video', 'Chọn video để tải lên') !!}
-                                {!! Form::file('video', ['class' => 'form-control']) !!}
-                            </div>
-
-                            {!! Form::submit('Tải lên', ['class' => 'btn btn-primary']) !!}
-
-                            {!! Form::close() !!}
-                            <form method="POST" action="{{ route('firebase.store') }}" enctype="multipart/form-data">
-    // ...
-</form>
+    <div class="form-group">
+        {!! Form::label('video', 'Chọn video để tải lên') !!}
+        {!! Form::file('video', ['class' => 'form-control']) !!}
+    </div>
+    {!! Form::submit('Tải lên', ['class' => 'btn btn-primary']) !!}
+{!! Form::close() !!}
+                            
                         @if(!isset($firebase))
                             {!! Form::submit('Thêm Danh Mục', ['class'=>'btn btn-success']) !!}
                         @else

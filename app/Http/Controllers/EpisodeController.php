@@ -16,8 +16,11 @@ class EpisodeController extends Controller
      */
     public function index()
     {
-        //
+        $list_episode = Episode::with('movie')->orderBy('movie_id','DESC')->get();
+        // return response()->json($list_episode);
+        return view('admincp.episode.index', compact('list_episode'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -68,7 +71,9 @@ class EpisodeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $list_movie = Movie::orderBy('id','DESC')->pluck('title','id');
+        $episode = Episode::find($id);
+        return view('admincp.episode.form', compact('episode','list_movie'));
     }
 
     /**
@@ -80,7 +85,15 @@ class EpisodeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $ep = Episode::find($id);
+        $ep->movie_id = $data['movie_id'];
+        $ep->linkphim = $data['link'];
+        $ep->episode = $data['episode'];
+        $ep->created_at = Carbon::now('Asia/Ho_Chi_Minh');
+        $ep->updated_at = Carbon::now('Asia/Ho_Chi_Minh');  
+        $ep->save();
+        return redirect()->to('episode');
     }
 
     /**
@@ -91,7 +104,8 @@ class EpisodeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $episode = Episode::find($id)->delete();
+        return redirect()->to('episode');
     }
     public function select_movie()
     {

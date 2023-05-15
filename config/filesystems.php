@@ -52,6 +52,11 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
+        'firebase' => [
+        'driver' => 'firebase',
+        'database_uri' => 'https://webphim-f2f2f-default-rtdb.firebaseio.com',
+        'storage_bucket' => 'firebase-adminsdk-kez83@webphim-f2f2f.iam.gserviceaccount.com',
+        ],
 
     ],
 

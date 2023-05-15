@@ -3,19 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
 
 class FirebaseController extends Controller
 {
-    public function create(){
-        return view('admincp.firebase.form');
-    }
-    public function store(Request $request)
-    {
-        
-        return redirect()->back();
-    }
     public function uploadVideo(Request $request)
 {
     // Kiểm tra xem có tệp được tải lên không

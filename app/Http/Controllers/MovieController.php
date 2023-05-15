@@ -8,6 +8,7 @@ use App\Models\Movie_Genre;
 use App\Models\Category;
 use App\Models\Genre;
 use App\Models\Country;
+use App\Models\Episode;
 use Carbon\Carbon;
 use File;
 use Storage;
@@ -169,6 +170,7 @@ class MovieController extends Controller
         $movie->category_id = $data['category_id'];
         $movie->country_id = $data['country_id'];
         $movie->ngaycapnhat = Carbon::now('Asia/Ho_Chi_Minh');
+        //them nhieu the loai phim
 
         foreach($data['genre'] as $key =>$gen){
                         $movie->genre_id = $gen[0];
@@ -200,11 +202,14 @@ class MovieController extends Controller
     public function destroy($id)
     {
         $movie = Movie::find($id);
+        //xoa anh
         if(!empty($movie->image)){
             unlink('uploads/movie/'.$movie->image);
         }
-        Movie::whereIn('movie_id',[$movie->id]);
-
+        //xoa the loai
+        Movie::whereIn('movie_id',[$movie->id])->delete();
+        //xoa tap phim
+        Episode::whereIn('movie_id',[$movie->id])->delete();
         $movie->delete();
         return redirect()->back();
     }

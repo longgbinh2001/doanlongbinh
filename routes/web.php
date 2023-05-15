@@ -8,8 +8,6 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\EpisodeController;
-use App\Http\Controllers\FirebaseController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,12 +40,6 @@ Route::resource('country', CountryController::class);
 //them tap phim
 Route::resource('episode', EpisodeController::class);
 Route::get('/select-movie', [EpisodeController::class, 'select_movie'])->name('select-movie');
-
-
-//up video
-Route::resource('firebase', FirebaseController::class);
-Route::post('/upload-video', [VideoController::class, 'uploadVideo'])->name('upload-video');
-Route::post('/firebase/store', [FirebaseController::class, 'store'])->name('firebase.store');
 
 
 Route::resource('movie', MovieController::class);
