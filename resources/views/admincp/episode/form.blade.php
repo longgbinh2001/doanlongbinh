@@ -17,21 +17,30 @@
                     @if(!isset($episode))
                         {!! Form::open(['route'=>'episode.store','method'=>'POST','enctype'=>'multipart/form-data']) !!}
                     @else
-                        {!! Form::open(['route'=>['episode.update',$movie->id],'method'=>'PUT','enctype'=>'multipart/form-data']) !!}
+                        {!! Form::open(['route'=>['episode.update',$episode->id],'method'=>'PUT','enctype'=>'multipart/form-data']) !!}
                     @endif
                         
                         <div class="form-group">
                             {!! Form::label('movie', 'Chọn Phim', []) !!}
-                            {!! Form::select('movie_id',['0' => 'Danh sách phim', 'Phim'=> $list_movie] ,isset($movie) ? $episode->movie_id : '', ['class'=>'form-control select-movie']) !!}
+                            {!! Form::select('movie_id',['0' => 'Danh sách phim', 'Phim'=> $list_movie] ,isset($episode) ? $episode->movie_id : '', ['class'=>'form-control select-movie']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('link', 'Link Phim', []) !!}
                             {!! Form::text('link', isset($episode) ? $episode->linkphim : '', ['class'=>'form-control','placeholder'=>'...']) !!}
                         </div>
+                        @if(isset($episode))
                         <<div class="form-group">
                             {!! Form::label('episode', 'Tập Phim', []) !!}
                             {!! Form::text('episode', isset($episode) ? $episode->episode : '', ['class'=>'form-control','placeholder'=>'...', isset($episode) ? 'readonly' : '']) !!}
                         </div>
+                        @else
+                        <div class="form-group">
+                            {!! Form::label('episode', 'Tập Phim', []) !!}
+                            <select name="episode" class="form-control" id="show_movie"></select>
+                        </div>
+
+                        @endif
+
                         
                         @if(!isset($episode))
                             {!! Form::submit('Thêm Tập Phim', ['class'=>'btn btn-success']) !!}

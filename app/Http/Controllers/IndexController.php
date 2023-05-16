@@ -91,7 +91,8 @@ class IndexController extends Controller
         $movie = Movie::with('category','genre','country','movie_genre')->where('slug',$slug)->where('status',1)->first();
         $related = Movie::with('category','genre','country')->where('category_id',$movie->category->id)->orderBy(DB::raw('RAND()'))->whereNotIn('slug',[$slug])->get();
         $phimhot_sidebar = Movie::where('phim_hot',1)->where('status',1)->orderBy('ngaycapnhat','DESC')->take('30')->get();
-    	return view('pages.movie', compact('category','genre','country','movie','related','phimhot_sidebar'));
+        $episode = Episode::with('movie')where('movie_id',$movie->id)->orderBy('episode','DESC')->take(3)->get();
+    	return view('pages.movie', compact('category','genre','country','movie','related','phimhot_sidebar','episode'));
     }
     public function watch($slug){
     $category = Category::orderBy('position','ASC')->where('status',1)->get();

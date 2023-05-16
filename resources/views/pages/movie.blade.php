@@ -145,6 +145,11 @@
                                  <li class="list-info-group-item"><span>Quốc gia</span> : 
                                     <a href="{{route('country',$movie->country->slug)}}" rel="tag">{{$movie->country->title}}</a>
                                  </li>
+                                 <li class="list-info-group-item"><span>Tập Phim </span> : 
+                                    @foreach($episode as $key =>$ep)
+                                    <a href="{{route('so-tap',$ep->episode)}}" rel="tag">{{$ep->episode}}</a>
+                                    @endforeach
+                                 </li>
                                  
                               </ul>
                               <div class="movie-trailer hidden"></div>

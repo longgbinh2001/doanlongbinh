@@ -16,16 +16,20 @@
                   <th scope="col">Mô tả phim</th>
                   <th scope="col">Tập Phim</th>
                   <th scope="col">Link Phim</th>
-                  {{-- <th scope="col">Trạng thái</th>
-                  <th scope="col">Quản lý</th> --}}
+                  {{-- <th scope="col">Trạng thái</th> --}}
+                  {{-- <th scope="col">Quản lý</th> --}}
                 </tr>
               </thead>
-              <tbody class="order_position">
+              <tbody>
                 @foreach($list_episode as $key => $episode)
                 <tr>
                   <th scope="row">{{$key}}</th>
-                  <td>{{$episode->movie->title}}</td>
-                  <td><img width="100" src="{{asset('uploads/movie/'.$episode->movie->image)}}"></td>
+                  <td>{{ isset($episode->movie) ? $episode->movie->title : 'Unknown' }}</td>
+                  <td>
+                      @if ($episode->movie)
+                          <img width="100" src="{{ asset('uploads/movie/' . $episode->movie->image) }}">
+                      @endif
+                  </td>
                   <td>{{$episode->episode}}</td>
                   <td>{!!$episode->linkphim!!}</td>
                   <{{-- td>
