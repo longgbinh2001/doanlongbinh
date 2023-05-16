@@ -28,20 +28,20 @@
                             {!! Form::label('link', 'Link Phim', []) !!}
                             {!! Form::text('link', isset($episode) ? $episode->linkphim : '', ['class'=>'form-control','placeholder'=>'...']) !!}
                         </div>
+
                         @if(isset($episode))
-                        <<div class="form-group">
-                            {!! Form::label('episode', 'Tập Phim', []) !!}
-                            {!! Form::text('episode', isset($episode) ? $episode->episode : '', ['class'=>'form-control','placeholder'=>'...', isset($episode) ? 'readonly' : '']) !!}
-                        </div>
+                            <div class="form-group">
+                                {!! Form::label('episode', 'Tập Phim', []) !!}
+                                {!! Form::text('episode', $episode->episode, ['class' => 'form-control', 'placeholder' => '...', 'readonly']) !!}
+                            </div>
                         @else
-                        <div class="form-group">
-                            {!! Form::label('episode', 'Tập Phim', []) !!}
-                            <select name="episode" class="form-control" id="show_movie"></select>
-                        </div>
-
+                            <div class="form-group">
+                                {!! Form::label('episode', 'Tập Phim', []) !!}
+                                {!! Form::select('episode',['class' => 'form-control', 'placeholder' => 'Chọn tập phim']) !!}
+                            </div>
                         @endif
-
                         
+
                         @if(!isset($episode))
                             {!! Form::submit('Thêm Tập Phim', ['class'=>'btn btn-success']) !!}
                         @else

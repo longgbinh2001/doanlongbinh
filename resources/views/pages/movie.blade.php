@@ -89,7 +89,7 @@
                               @if($movie->resolution!=5)
                               <div class="bwa-content">
                                  <div class="loader"></div>
-                                 <a href="{{route('watch',[$movie->slug])}}" class="bwac-btn">
+                                 <a href="{{ route('watch', ['slug' => $movie->slug, 'tap-phim' => $episode_tapdau['episode']]) }}" class="bwac-btn">
                                  <i class="fa fa-play"></i>
                                  </a>
                               </div>
@@ -147,7 +147,7 @@
                                  </li>
                                  <li class="list-info-group-item"><span>Tập Phim </span> : 
                                     @foreach($episode as $key =>$ep)
-                                    <a href="{{route('so-tap',$ep->episode)}}" rel="tag">{{$ep->episode}}</a>
+                                    <a href="{{ route('watch', ['slug' => $ep->movie->slug,'tap-phim'=>$ep->episode]) }}" rel="tag">Tập {{ $ep->episode }}</a>
                                     @endforeach
                                  </li>
                                  

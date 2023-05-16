@@ -45,7 +45,7 @@ class EpisodeController extends Controller
         $ep = new Episode();
         $ep->movie_id = $data['movie_id'];
         $ep->linkphim = $data['link'];
-        $ep->episode = $data['episode'];
+        $ep->episode = $data['episode'] ?? null;
         $ep->created_at = Carbon::now('Asia/Ho_Chi_Minh');
         $ep->updated_at = Carbon::now('Asia/Ho_Chi_Minh');  
         $ep->save();

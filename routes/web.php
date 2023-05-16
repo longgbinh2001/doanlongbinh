@@ -8,6 +8,8 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\EpisodeController;
+use App\Http\Controllers\FirebaseController;
+use App\Http\Controllers\VideoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,3 +48,9 @@ Route::resource('movie', MovieController::class);
 Route::get('/update_year_phim', [MovieController::class, 'update_year']);
 Route::get('/update_topview-phim', [MovieController::class, 'update_topview']);
 Route::get('/update_season_phim', [MovieController::class, 'update_season']);
+
+//video 
+Route::resource('video', VideoController::class);
+Route::get('video-upload', [ VideoController::class, 'getVideoUploadForm' ])->name('get.video.upload');
+Route::post('video-upload', [ VideoController::class, 'uploadVideo' ])->name('store.video');
+

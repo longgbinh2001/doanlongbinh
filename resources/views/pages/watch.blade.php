@@ -17,9 +17,9 @@
             <section id="content" class="test">
                <div class="clearfix wrap-content">
                   
-                  @foreach($movie->episode as $ep)
-                     {!! $ep->linkphim!!}
-                  @endforeach
+                  
+                     {!! $episode->linkphim!!}
+                  
                   
                   {{-- <div class="button-watch">
                      <ul class="halim-social-plugin col-xs-4 hidden-xs">

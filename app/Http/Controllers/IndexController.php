@@ -89,18 +89,26 @@ class IndexController extends Controller
         $genre = Genre::orderBy('id','DESC')->get();
         $country = Country::orderBy('id','DESC')->get();
         $movie = Movie::with('category','genre','country','movie_genre')->where('slug',$slug)->where('status',1)->first();
+        $episode_tapdau = Episode::with('movie')->where('movie_id',$movie->id)->orderBy('episode','ASC')->take(1)->first();
         $related = Movie::with('category','genre','country')->where('category_id',$movie->category->id)->orderBy(DB::raw('RAND()'))->whereNotIn('slug',[$slug])->get();
         $phimhot_sidebar = Movie::where('phim_hot',1)->where('status',1)->orderBy('ngaycapnhat','DESC')->take('30')->get();
-        $episode = Episode::with('movie')where('movie_id',$movie->id)->orderBy('episode','DESC')->take(3)->get();
-    	return view('pages.movie', compact('category','genre','country','movie','related','phimhot_sidebar','episode'));
+        $episode = Episode::with('movie')->where('movie_id',$movie->id)->orderBy('episode','DESC')->take(3)->get();
+    	return view('pages.movie', compact('category','genre','country','movie','related','phimhot_sidebar','episode','episode_tapdau'));
     }
     public function watch($slug){
+    if(isset($_GET['tap-phim'])){
+        $tapphim = $_GET['tap-phim'];
+    }else{
+        $tapphim = 1;
+    }
+    $tapphim = substr($tapphim, 0,9);
     $category = Category::orderBy('position','ASC')->where('status',1)->get();
     $genre = Genre::orderBy('id','DESC')->get();
     $country = Country::orderBy('id','DESC')->get();
     $movie = Movie::with('category','genre','country','movie_genre','episode')->where('slug',$slug)->where('status',1)->first();
     $phimhot_sidebar = Movie::where('phim_hot',1)->where('status',1)->orderBy('ngaycapnhat','DESC')->take('30')->get();
-    return view('pages.watch', compact('category','genre','country','movie','phimhot_sidebar'));
+    $episode = Episode::where('movie_id', $movie_id)->where('episode',$tapphim)->first();
+    return view('pages.watch', compact('category','genre','country','movie','phimhot_sidebar','episode'));
 }
     public function episode(){
     	return view('pages.episode');

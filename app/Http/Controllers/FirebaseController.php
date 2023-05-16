@@ -3,26 +3,44 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\ServiceAccount;
+
 
 class FirebaseController extends Controller
 {
-    public function uploadVideo(Request $request)
-{
-    // Kiểm tra xem có tệp được tải lên không
-    if ($request->hasFile('video')) {
-        // Lưu tệp vào bộ nhớ tạm của máy chủ
-        $file = $request->file('video');
-        $path = $file->store('videos', 'firebase');
 
-        // Trả về đường dẫn đến tệp được lưu trữ trên Firebase Storage
-        $url = Storage::disk('firebase')->url($path);
-
-        return "Video đã được tải lên: " . $url;
+    public function store(Request $request)
+    { 
+        return redirect()->back();
     }
+     public function create()
+    {
+        
+        return view('admincp.firebase.form');
+    }
+    public function uploadVideo(Request $request)
+    {
+        if ($request->hasFile('video')) {
+            $video = $request->file('video');
 
-    return "Không có tệp nào được tải lên.";
+            $storage = FirebaseStorage::storage();
+            $bucket = $storage->getBucket();
+            $file = fopen($video->getRealPath(), 'r');
+            $bucket->upload($file, [
+                'name' => 'videos/' . $video->getClientOriginalName()
+            ]);
+
+            // Additional processing...
+
+            return response()->json(['message' => 'Video uploaded successfully.'], 200);
+        } else {
+            return response()->json(['message' => 'No video file found.'], 400);
+        }
+    }
 }
-}
+
+
+   
+
 
