@@ -20,6 +20,7 @@
                   <th scope="col">Trạng thái</th>
                   <th scope="col">Danh mục</th>
                   <th scope="col">Thể loại</th>
+                  <th scope="col">Thuộc Thể loại</th>
                   <th scope="col">Quốc gia</th>
                   <th scope="col">Số tập</th>
                   <th scope="col">Ngày tạo</th>
@@ -84,6 +85,13 @@
                       @foreach($cate->movie_genre as  $gen)
                       <span class="badge badge-dark">{{$gen->title}}  </span>
                       @endforeach
+                  </td>
+                  <td>
+                    @if($cate->thuocphim=='phimle')
+                    Phim lẻ
+                    @else
+                    Phim Bộ
+                    @endif
                   </td>
 
                   <td>{{$cate->country->title}}</td>

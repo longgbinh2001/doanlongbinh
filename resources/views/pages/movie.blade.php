@@ -87,14 +87,16 @@
                            <div class="movie-poster col-md-3">
                               <img class="movie-thumb" src="{{asset('uploads/movie/'.$movie->image)}}" alt="{{$movie->image}}">
                               @if($movie->resolution!=5)
-                              <div class="bwa-content">
-                                 <div class="loader"></div>
-                                 <a href="{{ route('watch', ['slug' => $movie->slug, 'tap-phim' => $episode_tapdau['episode']]) }}" class="bwac-btn">
-                                 <i class="fa fa-play"></i>
-                                 </a>
-                              </div>
-                              @else
-                           <a href="#watch_trailler" style="display: block;" class="btn btn-primary #watch_trailler">Xem Trailler</a>
+                                 @if($episode_curren_list_count>0)
+                                    <div class="bwa-content">
+                                       <div class="loader"></div>
+                                       <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$episode_tapdau->episode)}}" class="bwac-btn">
+                                       <i class="fa fa-play"></i>
+                                       </a>
+                                    </div>
+                                 @else
+                              <a href="#watch_trailler" style="display: block;" class="btn btn-primary #watch_trailler">Xem Trailler</a>
+                              @endif
                            @endif
                            </div>
                            <div class="film-poster col-md-9">
@@ -132,7 +134,20 @@
                                  </li>
                                  
                                  <li class="list-info-group-item"><span>Thời lượng</span> : 133 Phút</li>
-                                 <li class="list-info-group-item"><span>Số tập</span> : {{$movie->sotap}}/{{$movie->sotap}}</li>
+                                 <li class="list-info-group-item">
+                                    <span>Tập Phim</span>:
+                                    @if($movie->thuocphim == 'phimbo')
+                                       {{$episode_curren_list_count}}/{{$movie->sotap}} - 
+                                       @if($episode_curren_list_count == $movie->sotap)
+                                          Hoàn Thành
+                                       @else
+                                          Đang cập nhật
+                                       @endif
+                                    @else
+                                       Phim lẻ
+                                    @endif
+                                 </li>
+
                                  <li class="list-info-group-item"><span>Thể loại</span> : 
                                     @foreach($movie->movie_genre as $gen)
                                        <a href="{{route('genre',$movie->genre->slug)}}" rel="category tag">{{$gen->title}}</a>
@@ -145,10 +160,17 @@
                                  <li class="list-info-group-item"><span>Quốc gia</span> : 
                                     <a href="{{route('country',$movie->country->slug)}}" rel="tag">{{$movie->country->title}}</a>
                                  </li>
-                                 <li class="list-info-group-item"><span>Tập Phim </span> : 
-                                    @foreach($episode as $key =>$ep)
-                                    <a href="{{ route('watch', ['slug' => $ep->movie->slug,'tap-phim'=>$ep->episode]) }}" rel="tag">Tập {{ $ep->episode }}</a>
-                                    @endforeach
+                                 <li class="list-info-group-item"><span>Tập Phim Mới Nhất</span> :   
+                                    
+                                    @if($movie->thuocphim=='phimbo')
+                                       @if($episode_curren_list_count>0)
+                                          @foreach($episode as $key =>$ep)
+                                          <a href="{{url('xem-phim/'.$ep->movie->slug.'/tap-'.$ep->episode)}}" rel="tag">Tập {{ $ep->episode }}</a>
+                                          @endforeach
+                                       @endif
+                                       @elseif($movie->thuocphim=='phimle')
+                                          Phim Lẻ
+                                    @endif
                                  </li>
                                  
                               </ul>

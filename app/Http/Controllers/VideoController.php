@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
  
 class VideoController extends Controller
 {
@@ -24,14 +25,17 @@ class VideoController extends Controller
             'video' => 'required|file|mimetypes:video/mp4',
         ]);
  
+        $sourcePath = public_path('uploads/videos');
         $fileName = $request->video->getClientOriginalName();
-        $filePath = 'public/uploads/videos/' . $fileName;
+        $destinationPath = public_path('uploads/videos/' . $fileName);
 
- 
-        $isFileUploaded = Storage::disk('public')->put($filePath, file_get_contents($request->video));
+        File::move($sourcePath, $destinationPath);
+
+        $isFileUploaded = Storage::disk('public')->putFile('uploads/videos', $request->video);
  
         // File URL to access the video in frontend
         $url = Storage::disk('public')->url($filePath);
+        // echo $url;
  
         if ($isFileUploaded) {
             $video = new Video();
