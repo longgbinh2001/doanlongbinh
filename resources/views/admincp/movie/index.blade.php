@@ -23,6 +23,7 @@
                   <th scope="col">Thuộc Thể loại</th>
                   <th scope="col">Quốc gia</th>
                   <th scope="col">Số tập</th>
+                  <th scope="col">Thời lượng phim</th>
                   <th scope="col">Ngày tạo</th>
                   <th scope="col">Ngày cập nhật</th>
                   <th scope="col">Năm phim</th>
@@ -96,6 +97,7 @@
 
                   <td>{{$cate->country->title}}</td>
                   <td>{{$cate->sotap}}</td>
+                  <td>{{$cate->thoiluong}}</td>
                   <td>{{$cate->ngaytao}}</td>
                   <td>{{$cate->ngaycapnhat}}</td>
                   <td>

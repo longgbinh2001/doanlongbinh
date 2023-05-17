@@ -89,6 +89,7 @@ class IndexController extends Controller
         $genre = Genre::orderBy('id','DESC')->get();
         $country = Country::orderBy('id','DESC')->get();
         $movie = Movie::with('category','genre','country','movie_genre')->where('slug',$slug)->where('status',1)->first();
+        //lay tap 1 
         $episode_tapdau = Episode::with('movie')->where('movie_id',$movie->id)->orderBy('episode','ASC')->take(1)->first();
         $related = Movie::with('category','genre','country')->where('category_id',$movie->category->id)->orderBy(DB::raw('RAND()'))->whereNotIn('slug',[$slug])->get();
         $phimhot_sidebar = Movie::where('phim_hot',1)->where('status',1)->orderBy('ngaycapnhat','DESC')->take('30')->get();
@@ -111,7 +112,7 @@ class IndexController extends Controller
     $movie = Movie::with('category','genre','country','movie_genre','episode')->where('slug',$slug)->where('status',1)->first();
     if(isset($tap)){
         $tapphim = $tap;
-        $tapphim = substr($tap, 4,1);
+        $tapphim = substr($tap, 4,20);
         $episode = Episode::where('movie_id', $movie->id)->where('episode',$tapphim)->first();
     }else{
         $tapphim = 1;

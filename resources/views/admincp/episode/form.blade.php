@@ -28,6 +28,7 @@
                             {!! Form::label('link', 'Link Phim', []) !!}
                             {!! Form::text('link', isset($episode) ? $episode->linkphim : '', ['class'=>'form-control','placeholder'=>'...']) !!}
                         </div>
+                        
 
                         @if(isset($episode))
                             <div class="form-group">

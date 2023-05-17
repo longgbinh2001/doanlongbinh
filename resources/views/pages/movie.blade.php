@@ -25,9 +25,7 @@
                <div id="halim_tab_popular_videos-widget-7" class="widget halim_tab_popular_videos-widget">
                   <div class="section-bar clearfix">
                      <div class="section-title">
-                        <span>Phim Hot</span>
-                        
-                        
+                        <span>Phim Hot</span> 
                      </div>
                   </div>
                   <section class="tab-content">
@@ -55,7 +53,7 @@
                                  </div>
                                  <p class="title">{{$hot_sidebar->title}}</p>
                               </a>
-                              <div class="viewsCount" style="color: #9d9d9d;">3.2K lượt xem</div>
+                              <div class="viewsCount" style="color: #9d9d9d;"></div>
                               <div style="float: left;">
                                  <span class="user-rate-image post-large-rate stars-large-vang" style="display: block;/* width: 100%; */">
                                  <span style="width: 0%"></span>
@@ -133,7 +131,7 @@
 
                                  </li>
                                  
-                                 <li class="list-info-group-item"><span>Thời lượng</span> : 133 Phút</li>
+                                 <li class="list-info-group-item"><span>Thời lượng</span> : {{$movie->thoiluong}}</li>
                                  <li class="list-info-group-item">
                                     <span>Tập Phim</span>:
                                     @if($movie->thuocphim == 'phimbo')
@@ -223,7 +221,7 @@
                      <div class="entry-content htmlwrap clearfix">
                         <div class="video-item halim-entry-box">
                            <article id="watch_trailler" class="item-content">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/dz6xe0xXqYE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>  
+                            <iframe width="100%" height="400" src="https://www.youtube.com/embed/{{$movie->trailer}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>  
                            
                            </article>
                         </div>

@@ -6,12 +6,18 @@ use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use App\Models\Movie;
+use App\Models\Episode;
+use Carbon\Carbon;
+
  
 class VideoController extends Controller
 {
+    
     public function getVideoUploadForm()
     {
-        return view('video-upload');
+        $list_movie = Movie::orderBy('id','DESC')->pluck('title','id');
+        return view('admincp.video.video-upload',compact('list_movie'));
     }
     public function show($id)
     {
@@ -20,31 +26,47 @@ class VideoController extends Controller
  
     public function uploadVideo(Request $request)
    {
-        $this->validate($request, [
-            'title' => 'required|string|max:255',
-            'video' => 'required|file|mimetypes:video/mp4',
-        ]);
- 
-        $sourcePath = public_path('uploads/videos');
-        $fileName = $request->video->getClientOriginalName();
-        $destinationPath = public_path('uploads/videos/' . $fileName);
+        // $this->validate($request, [
+        //     'title' => 'required|string|max:255',
+        //     'video' => 'required|file|mimetypes:video/mp4',
+        // ]);
 
-        File::move($sourcePath, $destinationPath);
+        
+        // $sourcePath = public_path().'uploads/videos';
+        // $fileName = $request->video->getClientOriginalName();
+        // $destinationPath = public_path().'uploads/videos/' . $fileName;
 
-        $isFileUploaded = Storage::disk('public')->putFile('uploads/videos', $request->video);
+        // File::move($sourcePath, $destinationPath);
+
+
+            $file = $request->file('video');
+            $success = false;
+            if($file){
+            $filename = $file->getClientOriginalName();
+            $path = public_path().'/uploads/videos/';
+            $file->move($path, $filename);
+            $filepath = '/uploads/videos/'.$filename;
+            $success = true;
+            }
+
+        // $isFileUploaded = Storage::disk('public')->putFile('uploads/videos', $request->video);
  
-        // File URL to access the video in frontend
-        $url = Storage::disk('public')->url($filePath);
-        // echo $url;
+        // // File URL to access the video in frontend
+        // $url = Storage::disk('public')->url($filePath);
+        // // echo $url;
  
-        if ($isFileUploaded) {
-            $video = new Video();
-            $video->title = $request->title;
-            $video->path = $filePath;
-            $video->save();
- 
-            return back()
-            ->with('success','Video has been successfully uploaded.');
+        if ($success) {
+            $data = $request->all();
+            $ep = new Episode();
+            $ep->movie_id = $data['movie_id'];
+            $ep->linkphim = $filepath;
+            $ep->episode = $data['episode'] ?? null;
+            $ep->created_at = Carbon::now('Asia/Ho_Chi_Minh');
+            $ep->updated_at = Carbon::now('Asia/Ho_Chi_Minh');  
+            $ep->videotype = 'upload';
+            $ep->save();
+
+            return redirect()->back();
         }
  
         return back()

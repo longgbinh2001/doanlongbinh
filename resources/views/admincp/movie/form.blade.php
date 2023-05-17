@@ -40,6 +40,10 @@
                             {!! Form::text('slug', isset($movie) ? $movie->slug : '', ['class'=>'form-control','placeholder'=>'...','id'=>'convert_slug']) !!}
                         </div>
                         <div class="form-group">
+                            {!! Form::label('thoiluong', 'Thời Lượng Phim', []) !!}
+                            {!! Form::text('thoiluong', isset($movie) ? $movie->thoiluong : '', ['class'=>'form-control','placeholder'=>'...','id'=>'convert_slug']) !!}
+                        </div>
+                        <div class="form-group">
                             {!! Form::label('description', 'Mô tả phim', []) !!}
                             {!! Form::textarea('description', isset($movie) ? $movie->description : '', ['style'=>'resize:none', 'class'=>'form-control','placeholder'=>'...','id'=>'description']) !!}
                         </div>

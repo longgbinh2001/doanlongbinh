@@ -14,7 +14,17 @@
             </div>
          </div>
          <main id="main-contents" class="col-xs-12 col-sm-12 col-md-8">
+
             <section id="content" class="test">
+               @if($episode->videotype=='upload')
+
+                     <video width="100%" height="500px" controls>
+                        <source src="{{URL::asset($episode->linkphim)}}" type="video/mp4">
+                        {{-- <source src="{{}}" type="video/mp4"> --}}
+                        {{-- <source src="/uploads/videos/mov_bbb.ogg" type="video/ogg"> --}}
+                     </video>
+                     @else
+                     
                <div class="clearfix wrap-content">
                   <style type="text/css">
                      .iframe_phim iframe{
@@ -22,8 +32,8 @@
                         height: 500px;
                      }
                   </style>
-                  
-                  <div class="iframe_phim">
+
+                  <div class="iframe_phim"> 
                      {!! $episode->linkphim!!}
                   </div>
                      
@@ -102,87 +112,10 @@
                   <div class="htmlwrap clearfix">
                      <div id="lightout"></div>
                   </div>
+            @endif
             </section>
-            <section class="related-movies">
-            <div id="halim_related_movies-2xx" class="wrap-slider">
-            <div class="section-bar clearfix">
-            <h3 class="section-title"><span>CÓ THỂ BẠN MUỐN XEM</span></h3>
-            </div>
-            <div id="halim_related_movies-2" class="owl-carousel owl-theme related-film">
-            <article class="thumb grid-item post-38494">
-               <div class="halim-item">
-               <a class="halim-thumb" href="chitiet.php" title="Câu Chuyện Kinh Dị Cổ Điển">
-               <figure><img class="lazy img-responsive" src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://1.bp.blogspot.com/-Hp2tnGf-zNQ/YO68R-yZRcI/AAAAAAAAJqY/Nc9qNCLgBtcjeWjOEIrOW45H5Vvva4xNgCLcBGAsYHQ/s320/MV5BNzE1YjdmMWYtMDk5ZS00YzEzLWE4NjctYmFiZmIwNzU0MjQ5XkEyXkFqcGdeQXVyMTA3MDAxNDcw._V1_.jpg" alt="Câu Chuyện Kinh Dị Cổ Điển" title="Câu Chuyện Kinh Dị Cổ Điển"></figure>
-               <span class="status">HD</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> <div class="icon_overlay"></div>
-               <div class="halim-post-title-box">
-               <div class="halim-post-title ">
-               <p class="entry-title">Câu Chuyện Kinh Dị Cổ Điển</p><p class="original_title">A Classic Horror Story</p>
-               </div>
-               </div>
-               </a>
-               </div>
-            </article>
-            <article class="thumb grid-item post-38494">
-               <div class="halim-item">
-               <a class="halim-thumb" href="chitiet.php" title="Câu Chuyện Kinh Dị Cổ Điển">
-               <figure><img class="lazy img-responsive" src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://1.bp.blogspot.com/-Hp2tnGf-zNQ/YO68R-yZRcI/AAAAAAAAJqY/Nc9qNCLgBtcjeWjOEIrOW45H5Vvva4xNgCLcBGAsYHQ/s320/MV5BNzE1YjdmMWYtMDk5ZS00YzEzLWE4NjctYmFiZmIwNzU0MjQ5XkEyXkFqcGdeQXVyMTA3MDAxNDcw._V1_.jpg" alt="Câu Chuyện Kinh Dị Cổ Điển" title="Câu Chuyện Kinh Dị Cổ Điển"></figure>
-               <span class="status">HD</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> <div class="icon_overlay"></div>
-               <div class="halim-post-title-box">
-               <div class="halim-post-title ">
-               <p class="entry-title">Câu Chuyện Kinh Dị Cổ Điển</p><p class="original_title">A Classic Horror Story</p>
-               </div>
-               </div>
-               </a>
-               </div>
-            </article>
-            <article class="thumb grid-item post-38494">
-               <div class="halim-item">
-               <a class="halim-thumb" href="chitiet.php" title="Câu Chuyện Kinh Dị Cổ Điển">
-               <figure><img class="lazy img-responsive" src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://1.bp.blogspot.com/-Hp2tnGf-zNQ/YO68R-yZRcI/AAAAAAAAJqY/Nc9qNCLgBtcjeWjOEIrOW45H5Vvva4xNgCLcBGAsYHQ/s320/MV5BNzE1YjdmMWYtMDk5ZS00YzEzLWE4NjctYmFiZmIwNzU0MjQ5XkEyXkFqcGdeQXVyMTA3MDAxNDcw._V1_.jpg" alt="Câu Chuyện Kinh Dị Cổ Điển" title="Câu Chuyện Kinh Dị Cổ Điển"></figure>
-               <span class="status">HD</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> <div class="icon_overlay"></div>
-               <div class="halim-post-title-box">
-               <div class="halim-post-title ">
-               <p class="entry-title">Câu Chuyện Kinh Dị Cổ Điển</p><p class="original_title">A Classic Horror Story</p>
-               </div>
-               </div>
-               </a>
-               </div>
-            </article>
-            <article class="thumb grid-item post-38494">
-               <div class="halim-item">
-               <a class="halim-thumb" href="chitiet.php" title="Câu Chuyện Kinh Dị Cổ Điển">
-               <figure><img class="lazy img-responsive" src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://1.bp.blogspot.com/-Hp2tnGf-zNQ/YO68R-yZRcI/AAAAAAAAJqY/Nc9qNCLgBtcjeWjOEIrOW45H5Vvva4xNgCLcBGAsYHQ/s320/MV5BNzE1YjdmMWYtMDk5ZS00YzEzLWE4NjctYmFiZmIwNzU0MjQ5XkEyXkFqcGdeQXVyMTA3MDAxNDcw._V1_.jpg" alt="Câu Chuyện Kinh Dị Cổ Điển" title="Câu Chuyện Kinh Dị Cổ Điển"></figure>
-               <span class="status">HD</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> <div class="icon_overlay"></div>
-               <div class="halim-post-title-box">
-               <div class="halim-post-title ">
-               <p class="entry-title">Câu Chuyện Kinh Dị Cổ Điển</p><p class="original_title">A Classic Horror Story</p>
-               </div>
-               </div>
-               </a>
-               </div>
-            </article>
-            <article class="thumb grid-item post-38494">
-               <div class="halim-item">
-               <a class="halim-thumb" href="chitiet.php" title="Câu Chuyện Kinh Dị Cổ Điển">
-               <figure><img class="lazy img-responsive" src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://1.bp.blogspot.com/-Hp2tnGf-zNQ/YO68R-yZRcI/AAAAAAAAJqY/Nc9qNCLgBtcjeWjOEIrOW45H5Vvva4xNgCLcBGAsYHQ/s320/MV5BNzE1YjdmMWYtMDk5ZS00YzEzLWE4NjctYmFiZmIwNzU0MjQ5XkEyXkFqcGdeQXVyMTA3MDAxNDcw._V1_.jpg" alt="Câu Chuyện Kinh Dị Cổ Điển" title="Câu Chuyện Kinh Dị Cổ Điển"></figure>
-               <span class="status">HD</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> <div class="icon_overlay"></div>
-               <div class="halim-post-title-box">
-               <div class="halim-post-title ">
-               <p class="entry-title">Câu Chuyện Kinh Dị Cổ Điển</p><p class="original_title">A Classic Horror Story</p>
-               </div>
-               </div>
-               </a>
-               </div>
-            </article>
-           
-            </div>
-            <script>
-               jQuery(document).ready(function($) {				
-               var owl = $('#halim_related_movies-2');
-               owl.owlCarousel({loop: true,margin: 4,autoplay: true,autoplayTimeout: 4000,autoplayHoverPause: true,nav: true,navText: ['<i class="hl-down-open rotate-left"></i>', '<i class="hl-down-open rotate-right"></i>'],responsiveClass: true,responsive: {0: {items:2},480: {items:3}, 600: {items:4},1000: {items: 4}}})});
-            </script>
-            </div>
-            </section>
+
+            
          </main>
         @include('pages.include.sidebar');
       </div>
